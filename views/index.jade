@@ -1,0 +1,21 @@
+extends layout
+
+block content
+
+  script(src='/javascripts/light.js')
+    
+  h1= title
+  p Welcome to #{title}
+  ul
+    each val, index in sensors
+      li= ': ' + val.name + '(' + val.switch + '):' + val._id
+        img(src='/images/light_off.png', id='img_light'+index)
+        button(id='ledbutton'+index) 눌러!
+
+  each val, index in sensors
+    script(type="text/javascript").
+      document.getElementById( "ledbutton"+index)
+        //- .addEventListener("click", eval("toggleImage"+#{index}))
+        .addEventListener("click", function() {
+            toggleImage(#{index});
+        }, false);
